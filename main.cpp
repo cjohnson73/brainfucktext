@@ -11,17 +11,15 @@ int main()
   string output = "++++++++++[";
   for(unsigned int j = 0; j<text.length(); j++)
   {
+      if(j<text.length()-1 && text.at(j)==text.at(j+1))
+        continue;
       char c = text.at(j);
       output += ">";
       int tens = (int)round(((float)c)/10);
       for(int i = 0; i<tens; i++)
         output += "+";
   }
-  for(unsigned int j = 0; j<text.length(); j++)
-  {
-      output += "<";
-  }
-  output += "-]";
+  output += "[<]>-]";
   for(unsigned int j = 0; j<text.length(); j++)
   {
       char c = text.at(j);
@@ -32,6 +30,11 @@ int main()
           output += (change > 0 ? "+" : "-");
       }
       output += ".";
+      if(j<text.length()-1 && text.at(j)==text.at(j+1))
+      {
+          output += ".>";
+          j++;
+      }
   }
   cout << output << endl;
   return 0;
